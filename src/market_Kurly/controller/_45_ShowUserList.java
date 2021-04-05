@@ -1,6 +1,7 @@
 package market_Kurly.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,17 +9,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.mysql.cj.Session;
-
-import market_Kurly.dao.buyDAO;
 import market_Kurly.dao.managerDAO;
+import market_Kurly.dto.customerDTO;
 
-@WebServlet("/shopMain.do")
-public class _00_ShopMain extends HttpServlet {
+@WebServlet("/showUserList.do")
+public class _45_ShowUserList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-     
+       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		reqPro(request, response);
 	}
@@ -28,37 +26,21 @@ public class _00_ShopMain extends HttpServlet {
 	}
 	
 	protected void reqPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		request.setCharacterEncoding("utf-8");
 		
-		HttpSession session = request.getSession();
+		ArrayList<customerDTO> userlist = managerDAO.getInstance().getAllUserList();
 		
-		String center = request.getParameter("center");
-		String mng_id = request.getParameter("mng_id");
-		String id = request.getParameter("id");
-		
-		if (id != null) {
-			
-			//로그인 상태 = 세션에 id 저장
-			if (id.equals("admin")) {
-				mng_id = id;
-				id = null;
-				session.setAttribute("mng_id", mng_id);
-			} else {
-				session.setAttribute("id", id);
-			}
-			
+		for (int i = 0; i < userlist.size(); i++) {
+			customerDTO cdto = userlist.get(i);
+			System.out.println(cdto.getId() + "/" + cdto.getName() + "/" + cdto.getReg_date());
 		}
 		
-		if (center == null) {
-			center = "03_center.jsp";
-		}
+		request.setAttribute("userlist", userlist);
 		
-		System.out.println("center=" + center);
-		
-		request.setAttribute("center", center);
-		
-		RequestDispatcher dis = request.getRequestDispatcher("marketKurly/00_shopMain.jsp");
+		RequestDispatcher dis = request.getRequestDispatcher("shopMain.do?center=45_showUserList.jsp");
 		dis.forward(request, response);
-		
+	
 	}
 
 }

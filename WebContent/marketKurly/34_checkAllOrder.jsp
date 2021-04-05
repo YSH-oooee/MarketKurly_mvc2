@@ -10,23 +10,27 @@
 <title>Insert title here</title>
 </head>
 <body>
+	
 	<%
 		ArrayList<buyDTO> buylist = (ArrayList<buyDTO>)request.getAttribute("buylist");
 	%>
-	<form action="checkAllOrder.do" method="post">
+	
+	<h3>전체 주문 내역</h3>
+	<hr size="1" color="purple" width="300"> <br><br>
+	
 		<table border="1" style="border-collapse: collapse;">
 			<tr height="50" align="center">
-				<td width="50">번호</td>
-				<td width="100">아이디</td>
-				<td width="100">주문자명</td>
-				<td width="100">상품명</td>
-				<td width="100">가격</td>
-				<td width="100">구매수량</td>
-				<td width="50">이미지</td>
-				<td width="200">구매일자</td>
-				<td width="100">결제수단</td>
-				<td width="300">주소</td>
-				<td width="100">배송현황</td>
+				<td width="50"><font size="3" color="purple">번호</font></td>
+				<td width="100"><font size="3" color="purple">아이디</font></td>
+				<td width="100"><font size="3" color="purple">주문자명</font></td>
+				<td width="100"><font size="3" color="purple">상품명</font></td>
+				<td width="100"><font size="3" color="purple">가격</font></td>
+				<td width="100"><font size="3" color="purple">구매수량</font></td>
+				<td width="50"><font size="3" color="purple">이미지</font></td>
+				<td width="200"><font size="3" color="purple">구매일자</font></td>
+				<td width="100"><font size="3" color="purple">결제수단</font></td>
+				<td width="300"><font size="3" color="purple">주소</font></td>
+				<td width="100"><font size="3" color="purple">배송현황</font></td>
 			</tr>
 		
 	<%
@@ -47,6 +51,7 @@
 				<td width="100"><%=bdto.getHowpay() %></td>
 				<td width="300"><%=bdto.getAddress() %></td>
 				<td width="200">
+				<form action="checkAllOrder.do" method="post">
 					<select name="delivery_status">
 						<option value="0" <c:if test="${delivery_status eq 0}">selected</c:if>>주문확인중</option>
 						<option value="1" <c:if test="${delivery_status eq 1}">selected</c:if>>배송준비중</option>
@@ -55,12 +60,14 @@
 					</select>
 					<input type="submit" value="수정">
 					<input type="hidden" value="<%=bdto.getCustomer_id() %>" name="id">
+					<input type="hidden" value="1" name="check">
+				</form>
 				</td>
 			</tr>		
 	<%
 		}
 	%>
 		</table>
-	</form>
+	
 </body>
 </html>

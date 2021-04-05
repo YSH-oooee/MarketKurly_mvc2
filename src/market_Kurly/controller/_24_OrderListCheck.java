@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import market_Kurly.dao.boardDAO;
-import market_Kurly.dto.boardDTO;
+import market_Kurly.dao.buyDAO;
+import market_Kurly.dto.buyDTO;
 
-@WebServlet("/customerCenter.do")
-public class _07_CustomerCenter extends HttpServlet {
+@WebServlet("/orderListCheck.do")
+public class _24_OrderListCheck extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-         
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		reqPro(request, response);
 	}
@@ -33,29 +33,12 @@ public class _07_CustomerCenter extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		String id = (String)session.getAttribute("id");
-		String mng_id = (String)session.getAttribute("mng_id");
+		System.out.println("id=" + id);
+		ArrayList<buyDTO> buylist = buyDAO.getInstance().getBuyList(id);
 		
-		int pageSize = 10;
-		String pageNum = request.getParameter("pageNum");
+		request.setAttribute("buylist", buylist);
 		
-		if(pageNum == null) {
-			pageNum = "1";
-		}
-		
-		int count = 0;
-		int number = 0;
-		
-		int curPage = Integer.parseInt(pageNum);
-		count = boardDAO.getInstance().getAllCount();
-		
-		int startRow = (curPage - 1) * pageSize;
-		int endRow = curPage * pageSize;
-		
-		ArrayList<boardDTO> boardList = boardDAO.getInstance().getAllBoardList(startRow, endRow);
-		
-		number = count - (curPage - 1) * pageSize;
-		
-		RequestDispatcher dis = request.getRequestDispatcher("shopMain.do?center=07_customerCenter.jsp");
+		RequestDispatcher dis = request.getRequestDispatcher("shopMain.do?center=24_orderListCheck.jsp");
 		dis.forward(request, response);
 		
 	}

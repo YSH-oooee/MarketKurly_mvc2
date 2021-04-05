@@ -5,9 +5,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import market_Kurly.dto.buyDTO;
+import market_Kurly.dto.customerDTO;
 import market_Kurly.dto.itemDTO;
 import market_Kurly.dto.managerDTO;
 
@@ -310,6 +312,7 @@ public class managerDAO {
 		
 	}
 	
+	//배송현황 변경
 	public void updateDeliveryStatus(int status, String id) {
 		
 		try {
@@ -337,6 +340,54 @@ public class managerDAO {
 			if(pstmt != null) { try { pstmt.close(); } catch (SQLException sqle) {} }
 			if(rs != null) { try { rs.close(); } catch (SQLException sqle) {} }
 		}
+		
+	}
+	
+	//전체 회원 목록
+	public ArrayList<customerDTO> getAllUserList() {
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		ArrayList<customerDTO> userList = new ArrayList<>();
+		
+		try {
+			
+			conn = getConnection();
+			
+			pstmt = conn.prepareStatement("select * from customer");
+			
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				
+				customerDTO cdto = new customerDTO();
+				
+				String id = rs.getString("id");
+				String name = rs.getString("name");
+				String reg_date = rs.getString("reg_date").substring(0, 10);
+				String tel = rs.getString("tel");
+				String address = rs.getString("address");
+				String email = rs.getString("email");
+				
+				cdto.setId(id);
+				cdto.setName(name);
+				cdto.setReg_date(reg_date);
+				cdto.setTel(tel);
+				cdto.setAddress(address);
+				cdto.setEmail(email);
+				
+				userList.add(cdto);
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) { try { conn.close(); } catch (SQLException sqle) {} }
+			if(pstmt != null) { try { pstmt.close(); } catch (SQLException sqle) {} }
+			if(rs != null) { try { rs.close(); } catch (SQLException sqle) {} }
+		}
+		
+		return userList;
 		
 	}
 
