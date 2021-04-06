@@ -60,15 +60,15 @@
 	
 	<p>
 	<c:if test="${ startPage > 10 }">
-		<a href="customerCenter.do?pageNum=${startPage - 10}">[이전]</a>
+		<a href="customerCenter.do?pageNum=${startPage - 10}">이전</a>
 	</c:if>
 	
 	<c:forEach var="i" begin="${ startPage }" end="${ endPage }" step="${ i = i+1 }">
-		<a href="customerCenter.do?pageNum=${ i }"> [${ i }] </a>
+		<a href="customerCenter.do?pageNum=${ i }"> ${ i } </a>
 	</c:forEach>
 	
 	<c:if test="${ endPage <= pageCount && endPage >= 10 }">
-		<a href="customerCenter.do?pageNum=${startPage + 10}">[다음]</a>
+		<a href="customerCenter.do?pageNum=${startPage + 10}">다음</a>
 	</c:if>
 	
 </body>
