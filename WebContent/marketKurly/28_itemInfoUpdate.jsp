@@ -19,10 +19,6 @@
 </head>
 <body>
 
-	<%
-		ArrayList<itemDTO> allItem = itemDAO.getInstance().getAllItem();
-	%>
-	
 	<table>
 		<tr>
 			<td width="1000" align="left">
@@ -45,51 +41,28 @@
 			<td width="50"><b>판매량</b></td>
 			<td width="100" colspan="2"><b>수정/삭제</b></td>		
 		</tr>
-	<%
-	for(int i = 0; i < allItem.size(); i++) {
-		itemDTO idto = allItem.get(i);
-	%>
+	<c:forEach var="list" items="${ allItemList }">
 		<tr height="50" align="center">
-			<td width="50">		<!-- 번호 -->
-				<%=idto.getItem_number() %>
+			<td width="50">${ list.item_number }</td>
+			<td width="100">${ list.item_category }</td>
+			<td width="100">${ list.item_name }</td>
+			<td width="100">${ list.item_price }</td>
+			<td width="50">${ list.item_stock }</td>
+			<td width="50">
+				<img alt="" src="marketKurly/img/${ list.item_image }" height="50">
 			</td>
-			<td width="100">		<!-- 카테고리 -->
-				<%= idto.getItem_category() %>
+			<td width="200">${ list.item_info }</td>
+			<td width="50">${ list.discount_rate }%</td>
+			<td width="100">${ list.reg_date }</td>
+			<td width="50">${ list.sold }</td>
+			<td width="50">
+				<a href="itemInfoUpdateForm.do?item_number=${ list.item_number }">수정</a>
 			</td>
-			<td width="100">		<!-- 상품명 -->
-				<%=idto.getItem_name() %>
-			</td>
-			<td width="100">		<!-- 가격 -->
-				<%=idto.getItem_price() %>
-			</td>
-			<td width="50">		<!-- 재고 -->
-				<%=idto.getItem_stock() %>
-			</td>
-			<td width="50">		<!-- 이미지 -->
-				<img alt="" src="marketKurly/img/<%=idto.getItem_image() %>" height="50">
-			</td>
-			<td width="200">		<!-- 상품정보 -->
-				<%=idto.getItem_info() %>
-			</td>
-			<td width="50">		<!-- 할인율 -->
-				<%=idto.getDiscount_rate() %>%
-			</td>
-			<td width="100">		<!-- 등록일 -->
-				<%=idto.getReg_date() %>
-			</td>
-			<td width="50">		<!-- 판매량 -->
-				<%=idto.getSold() %>
-			</td>
-			<td width="50">		<!-- 수정 -->
-				<a href="itemInfoUpdateForm.do?item_number=<%=idto.getItem_number()%>">수정</a>
-			</td>
-			<td width="50">		<!-- 삭제 -->
-				<a href="deleteItem.do?item_number=<%=idto.getItem_number()%>">삭제</a>
-			</td>
+			<td width="50">
+				<a href="deleteItem.do?item_number=${ list.item_number }">삭제</a>
+			</td>		
 		</tr>
-	<%
-	}
-	%>
+	</c:forEach>
 	</table>
 
 </body>

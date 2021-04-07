@@ -1,7 +1,6 @@
 package market_Kurly.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,13 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import market_Kurly.dao.itemDAO;
-import market_Kurly.dto.itemDTO;
+import market_Kurly.dao.managerDAO;
 
-@WebServlet("/itemInfoUpdate.do")
-public class _28_ItemInfoUpdate extends HttpServlet {
+@WebServlet("/deleteItem.do")
+public class _31_deleteItem extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		reqPro(request, response);
 	}
@@ -27,11 +25,13 @@ public class _28_ItemInfoUpdate extends HttpServlet {
 	
 	protected void reqPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		ArrayList<itemDTO> allItemList = itemDAO.getInstance().getAllItem();
+		request.setCharacterEncoding("utf-8");
 		
-		request.setAttribute("allItemList", allItemList);
+		int item_number = Integer.parseInt(request.getParameter("item_number"));
 		
-		RequestDispatcher dis = request.getRequestDispatcher("shopMain.do?center=28_itemInfoUpdate.jsp");
+		managerDAO.getInstance().deleteItem(item_number);
+		
+		RequestDispatcher dis = request.getRequestDispatcher("itemInfoUpdate.do");
 		dis.forward(request, response);
 	
 	}
