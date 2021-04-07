@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,12 +7,12 @@
 </head>
 <body>
 
-	<form action="33_insertNewItemPro.jsp" method="post" enctype="multipart/form-data">
+	<form action="insertNewItemPro.do" method="post" enctype="multipart/form-data">
 		
 		<table border="1" style="border-collapse: collapse;">
 			<tr height="30">
-				<td width="200">상품 카테고리</td>
-				<td width="500">
+				<td width="150" align="center">상품 카테고리</td>
+				<td width="300">
 					<select name="category">
 						<option value="채소">채소</option>
 						<option value="해산물">해산물</option>
@@ -24,49 +23,51 @@
 			</tr>
 			
 			<tr height="30">
-				<td width="200">상품명</td>
-				<td width="500">
+				<td width="150" align="center">상품명</td>
+				<td width="300">
 					<input type="text" name="name">
 				</td>
 			</tr>
 			
 			<tr height="30">
-				<td width="200">판매가</td>
-				<td width="500">
-					<input type="text" name="price">원
+				<td width="150" align="center">가격</td>
+				<td width="300">
+					<input type="text" name="price">
 				</td>
 			</tr>
 			
 			<tr height="30">
-				<td width="200">수량</td>
-				<td width="500">
-					<input type="text" name="stock">
+				<td width="150" align="center">재고</td>
+				<td width="300">
+					<input type="text" name="stock" size="3">
 				</td>
 			</tr>
 			
 			<tr height="30">
-				<td width="200">이미지</td>
-				<td width="500">
+				<td width="150" align="center">이미지</td>
+				<td width="300">
 					<input type="file" name="image">
 				</td>
 			</tr>
 			
 			<tr height="30">
-				<td width="200">상품정보</td>
-				<td width="500">
-					<input type="text" name="info" size="50">
+				<td width="150" align="center">상품정보</td>
+				<td width="300">
+					<input type="text" name="info">
 				</td>
 			</tr>
 			
 			<tr height="30">
-				<td width="200">할인율</td>
-				<td width="500">
-					<input type="text" name="discount_rate">%
+				<td width="150" align="center">할인율</td>
+				<td width="300">
+					<input type="text" name="discount_rate" size="3">%
 				</td>
 			</tr>
+			
+			<tr>
+				<td colspan="2" align="center"><input type="submit" value="상품 추가하기"></td>
+			</tr>
 		</table>
-		
-		<input type="submit" value="상품 추가하기">
 		
 	</form>
 

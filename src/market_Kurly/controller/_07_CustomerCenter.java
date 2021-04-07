@@ -30,6 +30,16 @@ public class _07_CustomerCenter extends HttpServlet {
 	
 		request.setCharacterEncoding("utf-8");
 		
+		HttpSession session = request.getSession();
+		
+		String mng_id = (String)session.getAttribute("mng_id");
+		String id = (String)session.getAttribute("id");
+		
+		if (mng_id == null && id == null) {
+			RequestDispatcher dis = request.getRequestDispatcher("customerLogin.do");
+			dis.forward(request, response);
+		}
+		
 		int pageSize = 10;
 		String pageNum = request.getParameter("pageNum");
 		

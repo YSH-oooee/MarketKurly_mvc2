@@ -8,6 +8,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+	$().ready(function() {
+		$("#btn").click(function() {
+			location.href = 'insertNewItem.do';
+		});
+	});
+</script>
 </head>
 <body>
 
@@ -18,7 +26,7 @@
 	<table>
 		<tr>
 			<td width="1000" align="left">
-				<button onclick="location.href='shopMain.do?center=insertNewItem.do'">신상품 추가하기</button>
+				<button id="btn">신상품 추가하기</button>
 			</td>
 		</tr>
 	</table>
