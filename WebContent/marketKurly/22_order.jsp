@@ -1,9 +1,6 @@
-<%@page import="market_Kurly.dto.cartDTO"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="market_Kurly.dao.buyDAO"%>
-<%@page import="market_Kurly.dto.customerDTO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,23 +9,11 @@
 </head>
 <body>
 
-	<%
-		request.setCharacterEncoding("utf-8");
-	
-		String id = (String)session.getAttribute("id");
-		
-		customerDTO cbean = buyDAO.getInstance().getCustomerInfo(id);
-		ArrayList<cartDTO> itemlist = buyDAO.getInstance().getCartItemList(id);
-		
-		int number = 0;
-		int total = Integer.parseInt(request.getParameter("total"));
-	%>
-	
 	<div>
 		<h2>주문서</h2>
 		<hr size="2" color="purple" width="300"> <br><br>
 		
-		<form action="23_insertOrderList.jsp" method="post">
+		<form action="insertOrderList.do" method="post">
 		
 			<table>
 				<tr height="50">
@@ -42,27 +27,22 @@
 						<hr size="1" color="purple" width="800">
 					</td>
 				</tr>
-	<%
-			for(int i = 0; i < itemlist.size(); i++) {
-				cartDTO dto = itemlist.get(i);
-	%>
+			<c:forEach var="list" items="${ itemlist }">
 				<tr height="50" align="center">
 					<td width="200">
-						<font size="2"><b><%=++number%></b></font>
+						<font size="2"><b>${ number = number + 1 }</b></font>
 					</td>
 					<td width="100">
-						<img alt="" src="img/<%=dto.getItem_image()%>" height="50">
+						<img alt="" src="marketKurly/img/${ list.item_image }" height="50">
 					</td>
 					<td width="400">
-						<font size="3"><%=dto.getItem_name()%></font>
+						<font size="3">${ list.item_name }</font>
 					</td>
 					<td width="100">
-						<font size="3"><%=dto.getBuy_count()%></font>
+						<font size="3">${ list.buy_count }</font>
 					</td>
 				</tr>
-	<%
-			}
-	%>
+			</c:forEach>
 			</table>
 			
 			<table>
@@ -83,7 +63,7 @@
 						<font size="2"><b>이름</b></font>
 					</td>
 					<td width="600">
-						<input type="text" name="buyername" value="<%=cbean.getName()%>" style="width:200px; height:30px;">
+						<input type="text" name="buyername" value="${ cdto.name }" style="width:200px; height:30px;">
 					</td>
 				</tr>
 				
@@ -92,7 +72,7 @@
 						<font size="2"><b>연락처</b></font>
 					</td>
 					<td width="600">
-						<input type="text" name="buyertel" value="<%=cbean.getTel()%>" style="width:200px; height:30px;">
+						<input type="text" name="buyertel" value="${ cdto.tel }" style="width:200px; height:30px;">
 					</td>
 				</tr>
 				
@@ -101,7 +81,7 @@
 						<font size="2"><b>주소</b></font>
 					</td>
 					<td width="600">
-						<input type="text" name="buyeraddress" value="<%=cbean.getAddress()%>" style="width:200px; height:30px;">
+						<input type="text" name="buyeraddress" value="${ cdto.address }" style="width:200px; height:30px;">
 					</td>
 				</tr>
 			</table> <br>
@@ -147,13 +127,13 @@
 				
 				<tr height="50">
 					<td align="right" width="800">
-						<h3><%=total %>원</h3>
+						<h3><fmt:formatNumber value="${ total }" type="number" pattern="#,##0" />원</h3>
 					</td>
 				</tr>
 				
 				<tr height="50">
 					<td align="center" width="800">
-						<input type="image" src="img/pay.PNG" name="submit" value="submit" style="height:50px;">
+						<input type="image" src="marketKurly/img/pay.PNG" name="submit" value="submit" style="height:50px;">
 					</td>
 				</tr>
 			</table>

@@ -31,7 +31,7 @@
 			<img alt="" src="marketKurly/img/top1.jpg"> &nbsp;
 			<a href="itemInfoUpdate.do" style="text-decoration: none">상품관리</a> &nbsp;
 			<img alt="" src="marketKurly/img/top1.jpg"> &nbsp;
-			<a href="checkAllOrder.do?check=0" style="text-decoration: none">주문확인</a> &nbsp;
+			<a href="checkAllOrder.do" style="text-decoration: none">주문확인</a> &nbsp;
 			<img alt="" src="marketKurly/img/top1.jpg"> &nbsp;
 			<a href="showUserList.do" style="text-decoration: none">회원관리</a> &nbsp;
 			<img alt="" src="marketKurly/img/top1.jpg"> &nbsp;

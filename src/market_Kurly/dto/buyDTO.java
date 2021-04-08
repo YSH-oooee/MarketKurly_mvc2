@@ -2,6 +2,7 @@ package market_Kurly.dto;
 
 public class buyDTO {
 	
+	private String buy_code;
 	private String customer_id;
 	private String customer_name;
 	private int cart_number;
@@ -14,6 +15,12 @@ public class buyDTO {
 	private String address;
 	private int delivery_status;
 	
+	public String getBuy_code() {
+		return buy_code;
+	}
+	public void setBuy_code(String buy_code) {
+		this.buy_code = buy_code;
+	}
 	public String getCustomer_id() {
 		return customer_id;
 	}

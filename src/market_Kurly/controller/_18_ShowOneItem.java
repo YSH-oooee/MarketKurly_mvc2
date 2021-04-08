@@ -1,7 +1,6 @@
 package market_Kurly.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,8 +13,8 @@ import javax.servlet.http.HttpSession;
 import market_Kurly.dao.itemDAO;
 import market_Kurly.dto.itemDTO;
 
-@WebServlet("/showOneCategory.do")
-public class _17_showOneCategory extends HttpServlet {
+@WebServlet("/showOneItem.do")
+public class _18_ShowOneItem extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,42 +26,21 @@ public class _17_showOneCategory extends HttpServlet {
 	}
 	
 	protected void reqPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	
 		request.setCharacterEncoding("utf-8");
 		
 		HttpSession session = request.getSession();
 		
-		String mng_id = (String)session.getAttribute("mng_id");
+		String id = (String)session.getAttribute("id");
+		int item_number = Integer.parseInt(request.getParameter("item_number"));
 		
-		int check = -1;
+		itemDTO idto = itemDAO.getInstance().getOneItem(item_number);
 		
-		if(mng_id != null) {
-			check = 1;
-		}
+		request.setAttribute("idto", idto);
 		
-		request.setAttribute("check", check);
-		
-		int cate_num = Integer.parseInt(request.getParameter("category"));
-		String category = "";
-		
-		if(cate_num == 1) {
-			category = "채소";
-		} else if(cate_num == 2) {
-			category = "해산물";
-		} else if(cate_num == 3) {
-			category = "육류";
-		} else if(cate_num == 4) {
-			category = "전자제품";
-		}
-		
-		ArrayList<itemDTO> oneCategoryList = itemDAO.getInstance().getOneCategory(category);
-				
-		request.setAttribute("category", category);
-		request.setAttribute("oneCategoryList", oneCategoryList);
-		
-		RequestDispatcher dis = request.getRequestDispatcher("shopMain.do?center=17_showOneCategory.jsp");
+		RequestDispatcher dis = request.getRequestDispatcher("shopMain.do?center=18_showOneItem.jsp");
 		dis.forward(request, response);
-		
+	
 	}
 
 }

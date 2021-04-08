@@ -5,7 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import market_Kurly.dto.buyDTO;
 import market_Kurly.dto.cartDTO;
@@ -125,23 +127,28 @@ public class buyDAO {
 	//주문 목록 정보 추가
 	public void insertOrderList(buyDTO dto) {
 		
+		Date now = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
+		
+		String buy_code = sdf.format(now) + "-" + dto.getCustomer_id();
+		
 		try {
 			
 			conn = getConnection();
 			
-			String sql = "insert into buy(customer_id, customer_name, cart_number, item_name, buy_price, buy_count, item_image, buy_date, howpay, address, delivery_status)";
-			sql += " values(?, ?, ?, ?, ?, ?, ?, now(), ?, ?, 0)";
+			String sql = "insert into buy values(?, ?, ?, ?, ?, ?, ?, ?, now(), ?, ?, 0)";
 			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, dto.getCustomer_id());
-			pstmt.setString(2, dto.getCustomer_name());
-			pstmt.setInt(3, dto.getCart_number());
-			pstmt.setString(4, dto.getItem_name());
-			pstmt.setInt(5, dto.getBuy_price());
-			pstmt.setInt(6, dto.getBuy_count());
-			pstmt.setString(7, dto.getItem_image());
-			pstmt.setString(8, dto.getHowpay());
-			pstmt.setString(9, dto.getAddress());
+			pstmt.setString(1, buy_code);
+			pstmt.setString(2, dto.getCustomer_id());
+			pstmt.setString(3, dto.getCustomer_name());
+			pstmt.setInt(4, dto.getCart_number());
+			pstmt.setString(5, dto.getItem_name());
+			pstmt.setInt(6, dto.getBuy_price());
+			pstmt.setInt(7, dto.getBuy_count());
+			pstmt.setString(8, dto.getItem_image());
+			pstmt.setString(9, dto.getHowpay());
+			pstmt.setString(10, dto.getAddress());
 			
 			pstmt.executeUpdate();
 			
@@ -232,6 +239,7 @@ public class buyDAO {
 				
 				buyDTO dto = new buyDTO();
 				
+				dto.setBuy_code(rs.getString("buy_code"));
 				dto.setCustomer_id(rs.getString("customer_id"));
 				dto.setCustomer_name(rs.getString("customer_name"));
 				dto.setCart_number(rs.getInt("cart_number"));

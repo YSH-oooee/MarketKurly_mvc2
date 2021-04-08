@@ -9,14 +9,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import market_Kurly.dao.managerDAO;
-import market_Kurly.dto.buyDTO;
+import market_Kurly.dao.buyDAO;
+import market_Kurly.dto.cartDTO;
+import market_Kurly.dto.customerDTO;
 
-@WebServlet("/checkAllOrder.do")
-public class _34_CheckAllOrder extends HttpServlet {
+@WebServlet("/order.do")
+public class _22_Order extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
+       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		reqPro(request, response);
 	}
@@ -26,17 +28,25 @@ public class _34_CheckAllOrder extends HttpServlet {
 	}
 	
 	protected void reqPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		request.setCharacterEncoding("utf-8");
 		
-		ArrayList<buyDTO> buylist = managerDAO.getInstance().getAllOrderList();
+		HttpSession session = request.getSession();
 		
-		int listSize = buylist.size();		
+		String id = (String)session.getAttribute("id");
+		
+		customerDTO cdto = buyDAO.getInstance().getCustomerInfo(id);
+		ArrayList<cartDTO> itemlist = buyDAO.getInstance().getCartItemList(id);
+		
 		int number = 0;
+		int total = Integer.parseInt(request.getParameter("total"));
+
+		request.setAttribute("cdto", cdto);
+		request.setAttribute("itemlist", itemlist);
+		request.setAttribute("number", new Integer(number));
+		request.setAttribute("total", new Integer(total));
 		
-		request.setAttribute("buylist", buylist);
-		request.setAttribute("listSize", listSize);
-		request.setAttribute("number", number);
-		
-		RequestDispatcher dis = request.getRequestDispatcher("shopMain.do?center=34_checkAllOrder.jsp");
+		RequestDispatcher dis = request.getRequestDispatcher("shopMain.do?center=22_order.jsp");
 		dis.forward(request, response);
 		
 	}

@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import market_Kurly.dao.managerDAO;
 import market_Kurly.dto.buyDTO;
 
-@WebServlet("/checkAllOrder.do")
-public class _34_CheckAllOrder extends HttpServlet {
+@WebServlet("/detailAllOrder.do")
+public class _35_DetailAllOrder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
+       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		reqPro(request, response);
 	}
@@ -26,19 +26,21 @@ public class _34_CheckAllOrder extends HttpServlet {
 	}
 	
 	protected void reqPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		request.setCharacterEncoding("utf-8");
 		
-		ArrayList<buyDTO> buylist = managerDAO.getInstance().getAllOrderList();
+		String buy_code = request.getParameter("buy_code");
 		
-		int listSize = buylist.size();		
-		int number = 0;
+		ArrayList<buyDTO> detailList = managerDAO.getInstance().getDetailOrderList(buy_code);
 		
-		request.setAttribute("buylist", buylist);
+		int listSize = detailList.size();
+		
+		request.setAttribute("detailList", detailList);
 		request.setAttribute("listSize", listSize);
-		request.setAttribute("number", number);
 		
-		RequestDispatcher dis = request.getRequestDispatcher("shopMain.do?center=34_checkAllOrder.jsp");
+		RequestDispatcher dis = request.getRequestDispatcher("shopMain.do?center=35_detailAllOrder");
 		dis.forward(request, response);
-		
+	
 	}
 
 }

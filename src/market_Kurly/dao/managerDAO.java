@@ -269,7 +269,7 @@ public class managerDAO {
 	//전체 주문 목록
 	public ArrayList<buyDTO> getAllOrderList() {
 		
-		ArrayList<buyDTO> orderlist = new ArrayList<>();
+		ArrayList<buyDTO> orderlist = new ArrayList<buyDTO>();
 		
 		try {
 			
@@ -284,6 +284,7 @@ public class managerDAO {
 				
 				buyDTO dto = new buyDTO();
 				
+				dto.setBuy_code(rs.getString("buy_code"));
 				dto.setCustomer_id(rs.getString("customer_id"));
 				dto.setCustomer_name(rs.getString("customer_name"));
 				dto.setCart_number(rs.getInt("cart_number"));
@@ -312,6 +313,55 @@ public class managerDAO {
 		
 	}
 	
+	//주문 상세보기
+	public ArrayList<buyDTO> getDetailOrderList(String buy_code) {
+		
+		ArrayList<buyDTO> orderlist = new ArrayList<buyDTO>();
+		
+		try {
+			
+			conn = getConnection();
+			
+			String sql = "select * from buy where buy_code=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, buy_code);
+			
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				
+				buyDTO dto = new buyDTO();
+				
+				dto.setBuy_code(rs.getString("buy_code"));
+				dto.setCustomer_id(rs.getString("customer_id"));
+				dto.setCustomer_name(rs.getString("customer_name"));
+				dto.setCart_number(rs.getInt("cart_number"));
+				dto.setItem_name(rs.getString("item_name"));
+				dto.setBuy_price(rs.getInt("buy_price"));
+				dto.setBuy_count(rs.getInt("buy_count"));
+				dto.setItem_image(rs.getString("item_image"));
+				dto.setBuy_date(rs.getString("buy_date"));
+				dto.setHowpay(rs.getString("howpay"));
+				dto.setAddress(rs.getString("address"));
+				dto.setDelivery_status(rs.getInt("delivery_status"));
+				
+				orderlist.add(dto);
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) { try { conn.close(); } catch (SQLException sqle) {} }
+			if(pstmt != null) { try { pstmt.close(); } catch (SQLException sqle) {} }
+			if(rs != null) { try { rs.close(); } catch (SQLException sqle) {} }
+		}
+		
+		return orderlist;
+		
+	} 
+	
 	//배송현황 변경
 	public void updateDeliveryStatus(int status, String id) {
 		
@@ -327,7 +377,7 @@ public class managerDAO {
 			if (rs.next()) {
 				
 				pstmt = conn.prepareStatement("update buy set delivery_status=? where customer_id=?");
-				pstmt.setInt(2, status);
+				pstmt.setInt(1, status);
 				pstmt.setString(2, id);
 				
 				pstmt.executeUpdate();

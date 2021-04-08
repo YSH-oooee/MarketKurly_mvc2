@@ -17,7 +17,7 @@ import market_Kurly.dao.managerDAO;
 import market_Kurly.dto.itemDTO;
 
 @WebServlet("/insertNewItemPro.do")
-public class _33_insertNewItemPro extends HttpServlet {
+public class _33_InsertNewItemPro extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

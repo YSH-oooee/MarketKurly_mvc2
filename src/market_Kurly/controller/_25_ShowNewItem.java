@@ -14,10 +14,9 @@ import javax.servlet.http.HttpSession;
 import market_Kurly.dao.itemDAO;
 import market_Kurly.dto.itemDTO;
 
-@WebServlet("/showAllCategory.do")
-public class _16_showAllCategory extends HttpServlet {
+@WebServlet("/showNewItem.do")
+public class _25_ShowNewItem extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		reqPro(request, response);
 	}
@@ -27,27 +26,24 @@ public class _16_showAllCategory extends HttpServlet {
 	}
 	
 	protected void reqPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		
 		request.setCharacterEncoding("utf-8");
-		
 		HttpSession session = request.getSession();
-		
-		itemDAO idao = itemDAO.getInstance();
-		
-		ArrayList<itemDTO> allItemList = idao.getAllItem();
 		
 		String mng_id = (String)session.getAttribute("mng_id");
 		
 		int check = -1;
 		
-		if(mng_id != null) {
+		if (mng_id != null) {
 			check = 1;
 		}
 		
-		request.setAttribute("check", check);
-		request.setAttribute("allItemList", allItemList);
+		ArrayList<itemDTO> newItemList = itemDAO.getInstance().getNewItem();
 		
-		RequestDispatcher dis = request.getRequestDispatcher("shopMain.do?center=16_showAllCategory.jsp");
+		request.setAttribute("check", check);
+		request.setAttribute("newItemList", newItemList);
+		
+		RequestDispatcher dis = request.getRequestDispatcher("shopMain.do?center=25_showNewItem.jsp");
 		dis.forward(request, response);
 		
 	}

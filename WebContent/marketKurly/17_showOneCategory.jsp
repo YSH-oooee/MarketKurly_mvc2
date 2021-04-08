@@ -1,6 +1,3 @@
-<%@page import="market_Kurly.dao.itemDAO"%>
-<%@page import="market_Kurly.dto.itemDTO"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -13,6 +10,21 @@
 <body>
 
 	<h2>${ category } 카테고리</h2>
+	
+	<div>	
+		
+		<form action="showOneCategory.do" method="post">
+			<select name="category">
+				<option value="1" <c:if test="${ cate_num eq 1 }">selected</c:if>>채소</option>
+				<option value="2" <c:if test="${ cate_num eq 2 }">selected</c:if>>해산물</option>
+				<option value="3" <c:if test="${ cate_num eq 3 }">selected</c:if>>육류</option>
+				<option value="4" <c:if test="${ cate_num eq 4 }">selected</c:if>>전자제품</option>
+			</select>
+			
+			<input type="image" src="marketKurly/img/findcate.png" name="submit" value="submit" style="width:25px;">	
+		</form>
+	
+	</div>
 	
 	<hr size="1" color="purple" width="300"> <br>
 	
