@@ -58,7 +58,7 @@ public class _20_InsertCart extends HttpServlet {
 		
 		request.setAttribute("item_number", new Integer(item_number));
 		
-		out.println("<script>alert('상품을 장바구니에 담았습니다.'); location.href='showOneItem.do';</script>");
+		out.println("<script>alert('상품을 장바구니에 담았습니다.'); history.go(-1);</script>");
 		out.flush();
 		
 	}

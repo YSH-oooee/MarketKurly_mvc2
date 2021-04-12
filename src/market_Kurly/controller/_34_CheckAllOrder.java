@@ -29,8 +29,10 @@ public class _34_CheckAllOrder extends HttpServlet {
 		
 		ArrayList<buyDTO> buylist = managerDAO.getInstance().getAllOrderList();
 		
-		int listSize = buylist.size();		
+		int listSize = buylist.size();
 		int number = 0;
+		
+		
 		
 		request.setAttribute("buylist", buylist);
 		request.setAttribute("listSize", listSize);

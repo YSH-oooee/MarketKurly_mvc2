@@ -8,11 +8,7 @@
 </head>
 <body>
 
-	<%
-		request.setCharacterEncoding("utf-8");
-	%>
-	
-	<form action="11_findMemberIdPro.jsp" method="post">
+	<form action="findMemberIdPro.do" method="post">
 	
 		<table>
 			<tr height="70" align="center">
@@ -55,7 +51,7 @@
 			
 			<tr height="50" align="center">
 				<td width="300">
-					<input type="image" src="img/find.PNG" name="submit" value="submit" style="width:310px;">
+					<input type="image" src="marketKurly/img/find.PNG" name="submit" value="submit" style="width:310px;">
 				</td>
 			</tr>
 		</table>

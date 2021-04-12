@@ -134,6 +134,7 @@
 				<tr height="50">
 					<td align="center" width="800">
 						<input type="image" src="marketKurly/img/pay.PNG" name="submit" value="submit" style="height:50px;">
+						<input type="hidden" name="total" value=${ total }>
 					</td>
 				</tr>
 			</table>

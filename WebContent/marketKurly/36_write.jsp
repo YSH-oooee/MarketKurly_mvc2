@@ -8,12 +8,62 @@
 </head>
 <body>
 
-	<%
-		request.setCharacterEncoding("utf-8");
+	<div align="center">
 	
-		String id = (String)session.getAttribute("id");
-		String managerId = (String)session.getAttribute("managerId");
-	%>
+		<h1>문의하기</h1>
+		
+		<hr color="purple" width="300" size="1"> <br>
+				
+	<div class="container mt-n10">		
+		<div class="card-body">
+			<div class="datatable">
+				<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">				
+					<div class="row">
+						<div class="col-sm-12">							
+							<table class="table table-bordered table-hover dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+								<tbody>	
+									<tr height="40" align="center">
+										<td width="20%">작성자</td>
+										<td width="30%">${id}</td>
+										<td width="20%">조회수</td>
+										<td width="30%">${bdto.readcount}</td>
+									</tr>
+									
+									<tr height="40" align="center">
+										<td width="20%">작성자</td>
+										<td>${bdto.writer}</td>
+										<td width="20%">작성일</td>
+										<td>${bdto.reg_date}</td>
+									</tr>
+									
+									<tr height="40" align="center">
+										<td>제목</td>
+										<td colspan="3">${bdto.title}</td>			
+									</tr>
+									
+									<tr height="40" align="center">
+										<td>글내용</td>
+										<td colspan="3">${bdto.content}</td>
+									</tr>
+									
+									<tr height="40" align="center">
+										<td colspan="4">
+											<input type="button" value="답글쓰기" onclick="location.href='writeAnswer.do?num=${bdto.number}'">
+											<input type="button" value="수정하기" onclick="location.href='update.do?num=${bdto.number}'">
+											<input type="button" value="삭제하기" onclick="location.href='delete.do?num=${bdto.number}'">
+											<input type="button" value="목록보기" onclick="location.href='customerCenter.do'">
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>	
+				</div>
+			</div>		
+		</div>		
+	</div>
+
+	</div>
 	
 	<form action="37_writePro.jsp" method="post">
 	

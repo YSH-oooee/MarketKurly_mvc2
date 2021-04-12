@@ -130,15 +130,13 @@ public class buyDAO {
 		Date now = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
 		
-		String buy_code = sdf.format(now) + "-" + dto.getCustomer_id();
+		String buy_code = sdf.format(now);
 		
 		try {
 			
 			conn = getConnection();
 			
-			String sql = "insert into buy values(?, ?, ?, ?, ?, ?, ?, ?, now(), ?, ?, 0)";
-			
-			pstmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement("insert into buy values(?, ?, ?, ?, ?, ?, ?, ?, now(), ?, ?, 0)");
 			pstmt.setString(1, buy_code);
 			pstmt.setString(2, dto.getCustomer_id());
 			pstmt.setString(3, dto.getCustomer_name());
@@ -151,6 +149,43 @@ public class buyDAO {
 			pstmt.setString(10, dto.getAddress());
 			
 			pstmt.executeUpdate();
+						
+			pstmt = conn.prepareStatement("SELECT * FROM BUY WHERE buy_code=?");
+			pstmt.setString(1, buy_code);
+			
+			rs = pstmt.executeQuery();
+			
+			int total_price = 0;
+			int total_count = 0;
+			String item_name = null;
+			
+			while (rs.next()) {
+				total_price += rs.getInt("buy_price");
+				item_name = rs.getString("item_name");
+			}
+			
+			pstmt = conn.prepareStatement("SELECT COUNT(*) FROM BUY WHERE buy_code=?");
+			pstmt.setString(1, buy_code);
+			
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				total_count = rs.getInt(1);
+			}
+			
+			if (total_count > 1) {
+				item_name = item_name + " 외 " + (total_count -1) + "개";
+			}
+			
+			pstmt = conn.prepareStatement("insert into buy_user values(?, ?, ?, ?, ?, ?, 0)");
+			pstmt.setString(1, buy_code);
+			pstmt.setString(2, dto.getCustomer_id());
+			pstmt.setString(3, dto.getCustomer_name());
+			pstmt.setString(4, item_name);
+			pstmt.setInt(5, total_price);
+			pstmt.setInt(6, total_count);
+			
+			pstmt.executeUpdate();			
 			
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -12,7 +12,8 @@
 </head>
 <body>
 
-	<div>	
+	<div>
+		<h1>전체 상품</h1>
 		<h3>상품 카테고리 검색</h3>
 		
 		<form action="showOneCategory.do" method="post">
@@ -29,8 +30,7 @@
 	</div>
 	
 	<hr size="1" color="purple" width="300"> <br>
-	
-	<h1>전체 상품</h1>
+		
 	<c:set var="j" value="0" />
 	<table>
 		<c:forEach var="list" items="${ allItemList }">

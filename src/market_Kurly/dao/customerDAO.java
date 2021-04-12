@@ -103,7 +103,7 @@ public class customerDAO {
 	//ID 찾기
 	public String findID(String name, String email) {
 		
-		String id = "";
+		String id = null;
 		
 		try {
 			
@@ -114,6 +114,7 @@ public class customerDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, name);
 			pstmt.setString(2, email);
+			
 			rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
@@ -135,18 +136,19 @@ public class customerDAO {
 	//비밀번호 찾기
 	public String findPW(String name, String id, String email) {
 		
-		String pw = "";
+		String pw = null;
 		
 		try {
 			
 			conn = getConnection();
 			
-			String sql = "select * from customer where name=? and id=? and emqil=?";
+			String sql = "select * from customer where name=? and id=? and email=?";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, name);
 			pstmt.setString(2, id);
 			pstmt.setString(3, email);
+			
 			rs = pstmt.executeQuery();
 			
 			if (rs.next()) {

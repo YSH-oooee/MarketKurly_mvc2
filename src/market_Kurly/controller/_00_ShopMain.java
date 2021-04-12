@@ -32,8 +32,8 @@ public class _00_ShopMain extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		String center = request.getParameter("center");
-		String mng_id = request.getParameter("mng_id");
-		String id = request.getParameter("id");
+		String mng_id = (String)session.getAttribute("mng_id");
+		String id = (String)session.getAttribute("id");
 		
 		if (id != null) {
 			
@@ -51,8 +51,6 @@ public class _00_ShopMain extends HttpServlet {
 		if (center == null) {
 			center = "03_center.jsp";
 		}
-		
-		System.out.println("center=" + center);
 		
 		request.setAttribute("center", center);
 		

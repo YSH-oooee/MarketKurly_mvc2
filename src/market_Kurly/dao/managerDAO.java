@@ -275,7 +275,7 @@ public class managerDAO {
 			
 			conn = getConnection();
 			
-			String sql = "select * from buy";
+			String sql = "select * from buy_user";
 			
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -287,9 +287,8 @@ public class managerDAO {
 				dto.setBuy_code(rs.getString("buy_code"));
 				dto.setCustomer_id(rs.getString("customer_id"));
 				dto.setCustomer_name(rs.getString("customer_name"));
-				dto.setCart_number(rs.getInt("cart_number"));
 				dto.setItem_name(rs.getString("item_name"));
-				dto.setBuy_price(rs.getInt("buy_price"));
+				dto.setBuy_price(rs.getInt("buy_total"));
 				dto.setBuy_count(rs.getInt("buy_count"));
 				dto.setItem_image(rs.getString("item_image"));
 				dto.setBuy_date(rs.getString("buy_date"));

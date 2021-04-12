@@ -21,13 +21,15 @@
 				<td width="100"><font size="3" color="purple">상품명</font></td>
 				<td width="100"><font size="3" color="purple">구매수량</font></td>
 				<td width="100"><font size="3" color="purple">배송현황</font></td>
+				<td width="100"></td>
 			</tr>
 		
 			<c:forEach var="buylist" items="${ buylist }">
 				<tr height="30" align="center">
-					<td width="200" rowspan="${ listSize }">${ buylist.buy_code }</td>
+					<td width="200">${ buylist.buy_code }</td>
 					<td width="100">${ buylist.customer_id }</td>
 					<td width="100">${ buylist.customer_name }</td>
+					<td width="200">${ buylist.item_name }</td>
 					<td width="100">${ listSize }개</td>
 					<td width="200">					
 					<form action="deliveryStatus.do" method="post">

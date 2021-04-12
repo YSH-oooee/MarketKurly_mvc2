@@ -9,15 +9,30 @@
 <body>
 
 	<div align="center">
-		<form action="customerLogin.do" method="post">
-		
-			<table>
-				<tr align="center" height="70">
+	
+		<h2>로그인</h2>
+	
+		<table>
+			<tr align="right" height="50">
 					<td width="300">
-						<h2>로그인</h2>
+						<font size="2" color="gray">
+							<a href="findMemberId.do" style="text-decoration: none">
+								아이디찾기
+							</a>
+						</font>
+						<img alt="" src="marketKurly/img/top1.jpg">
+						<font size="2" color="gray">
+							<a href="findMemberPw.do" style="text-decoration: none">
+								비밀번호찾기
+							</a>
+						</font>
 					</td>
 				</tr>
-				
+		</table>
+	
+		<form action="customerLoginPro.do" method="post">
+		
+			<table>
 				<tr align="center" height="50">
 					<td width="300">
 						<input type="text" name="id" placeholder="아이디를 입력하세요"
@@ -32,36 +47,23 @@
 					</td>
 				</tr>
 				
-				<tr align="right" height="50">
-					<td width="300">
-						<font size="2" color="gray">
-							<a href="00_shopMain.jsp?center=10_filndMemberId.jsp" style="text-decoration: none">
-								아이디찾기
-							</a>
-						</font>
-						<img alt="" src="marketKurly/img/top1.jpg">
-						<font size="2" color="gray">
-							<a href="00_shopMain.jsp?center=10_filndMemberPw.jsp" style="text-decoration: none">
-								비밀번호찾기
-							</a>
-						</font>
-					</td>
-				</tr>
-				
 				<tr height="50" align="center">
 					<td width="300">
 						<input type="image" src="marketKurly/img/login.PNG" name="submit" value="submit">
 					</td>
 				</tr>
 				
-				<tr height="50" align="center">
-					<td width="300">
-						<input type="image" src="marketKurly/img/join.PNG" onclick="location.href='00_shopMain.jsp?center=08_join.jsp'">
-					</td>
-				</tr>
 			</table>
 			
 		</form>
+		
+		<table>
+			<tr height="50" align="center">
+					<td width="300">
+						<input type="image" src="marketKurly/img/join.PNG" onclick="location.href='join.do'">
+					</td>
+				</tr>
+		</table>
 	</div>
 
 </body>

@@ -212,12 +212,14 @@ public class boardDAO {
 			
 			pstmt = conn.prepareStatement(readsql);
 			pstmt.setInt(1, number);
+			
 			pstmt.executeUpdate();
 			
 			String sql = "select * from board where num=?";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, number);
+			
 			rs = pstmt.executeQuery();
 			
 			if (rs.next()) {

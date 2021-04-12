@@ -48,27 +48,45 @@ public class cartDAO {
 			
 			conn = getConnection();
 			
-			String sql = "select max(cart_number) from cart";
+			pstmt = conn.prepareStatement("SELECT buy_count FROM cart WHERE buyer=? and item_name=?");
+			pstmt.setString(1, dto.getBuyer());
+			pstmt.setString(2, dto.getItem_name());
 			
-			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
-				cart_number = rs.getInt(1);
+				pstmt = conn.prepareStatement("UPDATE cart SET buy_count=buy_count+? WHERE buyer=? and item_name=?");
+				pstmt.setInt(1, dto.getBuy_count());
+				pstmt.setString(2, dto.getBuyer());
+				pstmt.setString(3, dto.getItem_name());
+				
+				pstmt.executeUpdate();
+			} else {
+				
+				String sql = "select max(cart_number) from cart";
+				
+				pstmt = conn.prepareStatement(sql);
+				
+				rs = pstmt.executeQuery();
+				
+				if (rs.next()) {
+					cart_number = rs.getInt(1);
+				}
+				
+				sql = "insert into cart(cart_number, buyer, item_name, buy_price, buy_count, item_image)";
+				sql += " values(?, ?, ?, ?, ?, ?)";
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, cart_number + 1);
+				pstmt.setString(2, dto.getBuyer());
+				pstmt.setString(3, dto.getItem_name());
+				pstmt.setInt(4, dto.getBuy_price());
+				pstmt.setInt(5, dto.getBuy_count());
+				pstmt.setString(6, dto.getItem_image());
+				
+				pstmt.executeUpdate();
+				
 			}
-			
-			sql = "insert into cart(cart_number, buyer, item_name, buy_price, buy_count, item_image)";
-			sql += " values(?, ?, ?, ?, ?, ?)";
-			
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, cart_number + 1);
-			pstmt.setString(2, dto.getBuyer());
-			pstmt.setString(3, dto.getItem_name());
-			pstmt.setInt(4, dto.getBuy_price());
-			pstmt.setInt(5, dto.getBuy_count());
-			pstmt.setString(6, dto.getItem_image());
-			
-			pstmt.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
