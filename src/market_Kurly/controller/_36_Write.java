@@ -1,6 +1,8 @@
 package market_Kurly.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,6 +34,8 @@ public class _36_Write extends HttpServlet {
 		request.setAttribute("id", id);
 		request.setAttribute("mng_id", mng_Id);
 		
+		RequestDispatcher dis = request.getRequestDispatcher("shopMain.do?center=36_write.jsp");
+		dis.forward(request, response);
 		
 	}
 

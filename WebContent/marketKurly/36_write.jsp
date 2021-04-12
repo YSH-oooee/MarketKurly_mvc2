@@ -1,10 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="marketKurly/css/styles.css" rel="stylesheet" />
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -20,42 +22,41 @@
 				<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">				
 					<div class="row">
 						<div class="col-sm-12">							
+						<form action="writePro.do" method="post">
 							<table class="table table-bordered table-hover dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
 								<tbody>	
-									<tr height="40" align="center">
-										<td width="20%">작성자</td>
-										<td width="30%">${id}</td>
-										<td width="20%">조회수</td>
-										<td width="30%">${bdto.readcount}</td>
+									<tr height="40">
+										<td width="20%" style="text-align: center;">제목</td>
+										<td colspan="3" style="text-align: left">
+											<input type="text" name="title" size="80" style="border: none;">
+										</td>
 									</tr>
 									
-									<tr height="40" align="center">
-										<td width="20%">작성자</td>
-										<td>${bdto.writer}</td>
-										<td width="20%">작성일</td>
-										<td>${bdto.reg_date}</td>
+									<tr height="40">
+										<td style="text-align: center;" width="20%">작성자</td>
+										<td style="text-align: center;" width="30%">${id}</td>
+										<td style="text-align: center;" width="20%">비밀번호</td>
+										<td style="text-align: left" width="30%">
+											<input type="password" name="pw" style="border: none;">
+										</td>
 									</tr>
 									
-									<tr height="40" align="center">
-										<td>제목</td>
-										<td colspan="3">${bdto.title}</td>			
-									</tr>
-									
-									<tr height="40" align="center">
-										<td>글내용</td>
-										<td colspan="3">${bdto.content}</td>
+									<tr height="40">
+										<td style="text-align: center; vertical-align: middle;">내용</td>
+										<td colspan="3" style="text-align: left">
+											<textarea rows="10" cols="80" style="border: none;"></textarea>
+										</td>			
 									</tr>
 									
 									<tr height="40" align="center">
 										<td colspan="4">
-											<input type="button" value="답글쓰기" onclick="location.href='writeAnswer.do?num=${bdto.number}'">
-											<input type="button" value="수정하기" onclick="location.href='update.do?num=${bdto.number}'">
-											<input type="button" value="삭제하기" onclick="location.href='delete.do?num=${bdto.number}'">
+											<input type="submit" value="작성하기">
 											<input type="button" value="목록보기" onclick="location.href='customerCenter.do'">
 										</td>
 									</tr>
 								</tbody>
 							</table>
+						</form>
 						</div>
 					</div>	
 				</div>
@@ -65,42 +66,5 @@
 
 	</div>
 	
-	<form action="37_writePro.jsp" method="post">
-	
-		<table border="1" style="border-collapse: collapse;">
-			<tr height="50">
-				<td width="200" align="center"><b>작성자</b></td>
-				<td width="400">
-					<input type="text" name="writer" size="20">
-				</td>
-			</tr>
-			
-			<tr height="50">
-				<td width="200" align="center"><b>제목</b></td>
-				<td width="400">
-					<input type="text" name="title" size="50">
-				</td>
-			</tr>
-			
-			<tr height="50">
-				<td width="200" align="center"><b>비밀번호</b></td>
-				<td width="400">
-					<input type="password" name="pw" size="20">
-				</td>
-			</tr>
-			
-			<tr height="150">
-				<td width="200" align="center"><b>글내용</b></td>
-				<td width="400">
-					<textarea rows="10" cols="50" name="content"></textarea>
-				</td>
-			</tr>
-		</table> <br>
-		
-		<input type="submit" value="글쓰기"> &nbsp;
-		<input type="reset" value="다시작성">
-	
-	</form>
-
 </body>
 </html>

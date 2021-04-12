@@ -52,7 +52,9 @@
 									
 									<tr height="40" align="center">
 										<td colspan="4">
+										<c:if test="${ !empty mng_id }">
 											<input type="button" value="답글쓰기" onclick="location.href='writeAnswer.do?num=${bdto.number}'">
+										</c:if>
 											<input type="button" value="수정하기" onclick="location.href='update.do?num=${bdto.number}'">
 											<input type="button" value="삭제하기" onclick="location.href='delete.do?num=${bdto.number}'">
 											<input type="button" value="목록보기" onclick="location.href='customerCenter.do'">
