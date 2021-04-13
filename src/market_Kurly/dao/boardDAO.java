@@ -127,7 +127,7 @@ public class boardDAO {
 			
 			conn = getConnection();
 			
-			String refsql = "select max(ref) from baord";
+			String refsql = "select max(ref) from board";
 			
 			pstmt = conn.prepareStatement(refsql);
 			rs = pstmt.executeQuery();

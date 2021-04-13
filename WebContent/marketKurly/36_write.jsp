@@ -28,13 +28,21 @@
 									<tr height="40">
 										<td width="20%" style="text-align: center;">제목</td>
 										<td colspan="3" style="text-align: left">
-											<input type="text" name="title" size="80" style="border: none;">
+											<c:if test="${!empty sessionScope.mng_id}">
+												<input type="text" name="title" size="80" style="border: none;" value="[공지]">
+											</c:if>
+											<c:if test="${!empty sessionScope.mng_id}">
+												<input type="text" name="title" size="80" style="border: none;"">
+											</c:if>
 										</td>
 									</tr>
 									
 									<tr height="40">
 										<td style="text-align: center;" width="20%">작성자</td>
-										<td style="text-align: center;" width="30%">${id}</td>
+										<td style="text-align: center;" width="30%">
+											<c:if test="${!empty sessionScope.id}">${ id }</c:if>
+											<c:if test="${!empty sessionScope.mng_id}">관리자</c:if>
+										</td>
 										<td style="text-align: center;" width="20%">비밀번호</td>
 										<td style="text-align: left" width="30%">
 											<input type="password" name="pw" style="border: none;">
@@ -44,12 +52,18 @@
 									<tr height="40">
 										<td style="text-align: center; vertical-align: middle;">내용</td>
 										<td colspan="3" style="text-align: left">
-											<textarea rows="10" cols="80" style="border: none;"></textarea>
+											<textarea rows="10" cols="80" name="content" style="border: none;"></textarea>
 										</td>			
 									</tr>
 									
 									<tr height="40" align="center">
 										<td colspan="4">
+											<c:if test='${!empty sessionScope.id}'>
+												<input type="hidden" name="writer" value="${sessionScope.id}">
+											</c:if>
+											<c:if test='${!empty sessionScope.mng_id}'>
+												<input type="hidden" name="writer" value="${sessionScope.mng_id}">
+											</c:if>
 											<input type="submit" value="작성하기">
 											<input type="button" value="목록보기" onclick="location.href='customerCenter.do'">
 										</td>

@@ -36,10 +36,10 @@
 										<th width="80">조회수</th>
 									</tr>
 								</thead>								
-								<tbody>	
+								<tbody>
 								<c:forEach var="board" items="${ boardlist }">							
 									<tr role="row" class="odd">
-										<td align="center"><c:out value="${ number-i }" /></td>
+										<td align="center"><c:out value="${ board.number }" /></td>
 										<td>
 											<c:if test="${ board.re_step > 1 }">
 												<c:forEach var="j" begin="0" end="${ (board.re_step - 1) *3 }" step="${ j = j+1 }">
@@ -53,7 +53,10 @@
 												<a href="checkPwForRead.do?number=${ board.number }">${ board.title }</a>
 											</c:if>
 										</td>
-										<td align="center">${ board.writer }</td>
+										<td align="center">
+											<c:if test="${board.writer eq 'admin'}">관리자</c:if>
+											<c:if test="${board.writer ne 'admin'}">${board.writer}</c:if>
+										</td>
 										<td align="center">${ board.reg_date }</td>
 										<td align="center">${ board.readcount }</td>
 									</tr>

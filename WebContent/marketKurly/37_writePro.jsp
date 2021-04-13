@@ -10,24 +10,5 @@
 </head>
 <body>
 
-	<%
-		request.setCharacterEncoding("utf-8");
-	
-		String writer = request.getParameter("writer");
-		String title = request.getParameter("title");
-		String pw = request.getParameter("pw");
-		String content = request.getParameter("content");
-		
-		boardDTO bdto = new boardDTO();
-		
-		bdto.setWriter(writer);
-		bdto.setTitle(title);
-		bdto.setPw(pw);
-		bdto.setContent(content);
-		
-		boardDAO.getInstance().insertBoard(bdto);
-		response.sendRedirect("00_shopMain.jsp?center=07_customerCenter.jsp");
-	%>
-
 </body>
 </html>

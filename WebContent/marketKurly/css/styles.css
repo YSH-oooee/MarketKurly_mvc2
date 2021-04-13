@@ -282,7 +282,7 @@ input {
 }
 
 input:focus {
-	outline:2px solid #d50000;
+	outline: none;
 }
 
 button,
@@ -2887,7 +2887,7 @@ select.form-control:focus::-ms-value {
   margin-bottom: 0;
   font-size: 0.875rem;
   line-height: 1;
-  color: #69707a;
+  color: #000;
   background-color: transparent;
   border: solid transparent;
   border-width: 1px 0;
@@ -15505,7 +15505,7 @@ a.text-danger-soft:hover, a.text-danger-soft:focus {
 }
 
 .text-body {
-  color: #69707a !important;
+  color: #000 !important;
 }
 
 .text-muted {
